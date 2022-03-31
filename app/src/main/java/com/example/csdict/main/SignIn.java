@@ -1,4 +1,4 @@
-package com.example.csdict;
+package com.example.csdict.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.csdict.AdminWoork.AdminWork;
 import com.example.csdict.DataModels.DataModelUser;
+import com.example.csdict.R;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,9 @@ public class SignIn  extends AppCompatActivity {
     EditText email_Edit;
     EditText pass_Edit;
     Button reset_pass ;
+
+    DBHelper dbHelper ;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,7 @@ public class SignIn  extends AppCompatActivity {
         email_Edit = findViewById(R.id.etemail);
         pass_Edit  = findViewById(R.id.et_pass_in);
         reset_pass = findViewById(R.id.reset_pas);
-
+           dbHelper= new DBHelper(getApplicationContext());
 
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +77,11 @@ public class SignIn  extends AppCompatActivity {
                  signInUser();
           }
       }
-
+        email_Edit.setText("");
+        pass_Edit.setText("");
     }
 
     private void signInUser() {
-         DBHelper dbHelper = new DBHelper(getApplicationContext());
 
          DataModelUser modelUser = dbHelper.searchUser(email_Edit.getText().toString(),pass_Edit.getText().toString());
 
@@ -104,11 +108,12 @@ public class SignIn  extends AppCompatActivity {
 
          }
 
+
+
     }
 
     private void resetPssword() {
 
-         DBHelper dbHelper = new DBHelper(getApplicationContext());
          DataModelUser user = dbHelper.resetPass(email_Edit.getText().toString());
           Intent intent = new Intent(getApplicationContext(),ResetPassword.class);
           intent.putExtra("pass_q",user.getReset_qu());

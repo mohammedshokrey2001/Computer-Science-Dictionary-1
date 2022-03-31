@@ -1,15 +1,17 @@
-package com.example.csdict;
+package com.example.csdict.main;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.csdict.DataModels.DataModelMessage;
 import com.example.csdict.DataModels.DataModelUser;
 import com.example.csdict.DataModels.DataModelWord;
 
@@ -37,11 +39,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String WORD_DESCRIPTION = "word_description";
     public static final String WORD_ABBSERVATION = "word_APP";
 
+    // table three messages
+    public static final String  MESSAGES_TABLE = "MESSAGES_TABLE";
+    public static final String  MESSAGES_SENDER = "MESSAGES_SENDER";
+    public static final String  MESSAGES_RECIVER = "MESSAGES_RECIVER";
+    public static final String  MESSAGES_TITLE = "MESSAGES_TITLE";
+    public static final String  MESSAGES_FLAG = "MESSAGES_FLAG";
+    public static final String  MESSAGES_CONTENT = "MESSAGES_CONTENT";
+
 
     //DATABASE WORK
     private  final Context context;
     private static final String DATABASE_NAME = "mysqldb.db";
-    private static final int DATABASE_VERISON = 1;
+    private static final int DATABASE_VERISON = 2;
 
 
     public DBHelper(@Nullable Context context) {
@@ -76,14 +86,39 @@ public class DBHelper extends SQLiteOpenHelper {
                 +" ); "
                 ;
 
+
+
+       // String query3 = "CREATE TABLE " + MESSAGES_TABLE +"( ID INTEGER PRIMARY KEY AUTOINCREMENT,  )";
         sqLiteDatabase.execSQL(query1);
         sqLiteDatabase.execSQL(query2);
+        //sqLiteDatabase.execSQL(query3);
 
 
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int old, int news) {
+              if (news >old){
+
+                  String query ="CREATE TABLE "+ MESSAGES_TABLE + " ( "
+                          + ID + "  INTEGER PRIMARY KEY AUTOINCREMENT,  "
+                          +MESSAGES_TITLE +" VARCHAR (40) ,"
+                          +MESSAGES_SENDER +" VARCHAR (40) ,"
+                          +MESSAGES_RECIVER + " VARCHAR(40), "
+                          +MESSAGES_CONTENT +" VARCHAR (4000) ,"
+                          +MESSAGES_FLAG +" VARCHAR (40) "
+
+                          +" ); "
+                          ;
+
+
+
+
+
+                  sqLiteDatabase.execSQL(query);
+
+
+              }
 
     }
 
@@ -92,7 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ContentValues cv = new ContentValues();
         cv.put(NAME ,dataModelUser.getName());
-        cv.put(PASS ,dataModelUser.getPass());
+        cv.put(PASS ,  SecyrityOne.encyrptPassUser(dataModelUser.getPass()));
         cv.put(PASS_A ,dataModelUser.getReset_answer());
         cv.put(EMAIL ,dataModelUser.getMail());
         cv.put(PASS_Q,dataModelUser.getReset_qu());
@@ -112,9 +147,70 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean addMessage(@NonNull DataModelMessage dataModelMessage){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+
+        String encrupt_message =  SecyrityOne.encrypt(dataModelMessage.getMessage());
+        ContentValues cv = new ContentValues();
+        cv.put(MESSAGES_TITLE,dataModelMessage.getTitle());
+        cv.put(MESSAGES_SENDER,dataModelMessage.getSender());
+        cv.put(MESSAGES_RECIVER,dataModelMessage.getReceiver());
+        cv.put(MESSAGES_CONTENT,encrupt_message);
+
+        long insert = database.insert(MESSAGES_TABLE ,null,cv);
+
+        if ( insert==-1){
+
+            return  false;
+        }else {
+            return true;
+        }
+
+
+    }
+
+    public  ArrayList<DataModelMessage> schMessages(String mail , String flag){
+        ArrayList<DataModelMessage> modelMessages  = new ArrayList<DataModelMessage>();
+        SQLiteDatabase database = this.getReadableDatabase();
+
+
+
+        Cursor cursor = database.rawQuery("select * from " +
+                        MESSAGES_TABLE + "  where  " + flag + " = ? ",
+                new String[]{mail});
+
+        if (cursor.getCount()==0){
+            return  null;
+
+
+        }
+        else {
+
+            while (cursor.moveToNext()) {
+
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String sender = cursor.getString(2);
+                String reciver = cursor.getString(3);
+                String message = cursor.getString(4);
+                Log.i("message: ", "schMessages1: "+message +"id = "+id);
+
+                String message_plain  = SecyrityOne.decrypt(message);
+                Log.i("message: ", "schMessages2: "+message_plain);
+                DataModelMessage modelMessage = new DataModelMessage(message_plain,String.valueOf(id),sender,reciver,title);
+                modelMessages.add(modelMessage);
+
+            }
+            return modelMessages;
+
+        }
+
+    }
+
 
     DataModelUser searchUser(String mail , String pass){
-
+        pass  = SecyrityOne.encyrptPassUser(pass);
         DataModelUser modelUser  = null;
         SQLiteDatabase database = this.getReadableDatabase();
 
@@ -130,6 +226,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         }
         else {
+
             while (cursor.moveToNext()) {
 
                 int id = cursor.getInt(0);
@@ -188,6 +285,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
+    public void deleteUser(String id){
+        SQLiteDatabase db = getWritableDatabase();
+
+       int d =  db.delete( USER_TABLE,"id=? ",new String[]{id});
+
+    }
 
 
     public ArrayList<DataModelWord>getWords(String model ,String user_fav){
@@ -353,9 +457,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     data = new DataModelUser("",String.valueOf(id),"","","" ,pass_q ,pass_a);
                 } while (cursor.moveToNext());
 
-            } else {
-                /////
-
             }
 
 
@@ -367,16 +468,23 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         boolean set_new_pass(String new_pass ,int id_user){
+
+        new_pass = SecyrityOne.encyrptPassUser(new_pass);
+
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor  cursor1 = database.rawQuery("update "+USER_TABLE + " set " + PASS +"='"+new_pass +"' where id ="+id_user,new String[]{});
 
-            if (cursor1.moveToFirst()){
+            return (cursor1.moveToFirst());
 
-                   return  true;
-            }
-            else {
-                   return  false;
-            }
+        }
+
+
+
+
+        public void deleteMessage(String id){
+            SQLiteDatabase db = getWritableDatabase();
+
+            int d =  db.delete( MESSAGES_TABLE,"id=? ",new String[]{id});
 
 
         }

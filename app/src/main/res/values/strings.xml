@@ -10,8 +10,13 @@
     <string name="tab_text_5">Words</string>
     <string name="tab_text_6">System Over view </string>
 
+    <string name="tab_text_7">Inbox Messages</string>
+    <string name="tab_text_8">Sent Messages</string>
+    <string name="tab_text_9">new Message</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_admin_work">AdminWork</string>
+    <string name="title_activity_messages">Messages</string>
 </resources>

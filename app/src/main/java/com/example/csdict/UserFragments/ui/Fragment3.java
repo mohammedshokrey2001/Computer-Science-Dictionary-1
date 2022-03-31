@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.csdict.DBHelper;
+import com.example.csdict.main.DBHelper;
 import com.example.csdict.DataModels.DataModelWord;
 import com.example.csdict.R;
 import com.example.csdict.RecycleViewAdminWord.ViewAdapterAd;
-import com.example.csdict.WordProfileAdminView;
+import com.example.csdict.main.WordProfileAdminView;
 
 import java.util.ArrayList;
 

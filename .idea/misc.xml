@@ -7,14 +7,18 @@
         <entry key="..\:/android/CSdict2/app/src/main/res/drawable-v24/header_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_admin_work.xml" value="0.1693840579710145" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_message_profile.xml" value="0.19655797101449277" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_reset_password.xml" value="0.2" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_sign_in.xml" value="0.264" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_sign_up.xml" value="0.21240942028985507" />
-        <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_user_profile_admin_view.xml" value="0.536" />
+        <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_user_profile_admin_view.xml" value="0.264" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_user_work.xml" value="0.264" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_view_all.xml" value="0.1" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/activity_word_profile_admin_view.xml" value="0.264" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/form_signin.xml" value="0.264" />
+        <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment7.xml" value="0.20606884057971014" />
+        <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment8.xml" value="0.25" />
+        <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment9.xml" value="0.152" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_1.xml" value="0.4" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_2.xml" value="0.12760416666666666" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_3.xml" value="0.2" />
@@ -22,8 +26,10 @@
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_5.xml" value="0.12760416666666666" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_6.xml" value="0.4" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_admin_work.xml" value="0.12708333333333333" />
+        <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_messages.xml" value="0.12760416666666666" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/fragment_user_work.xml" value="0.21240942028985507" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/signup_form.xml" value="0.25" />
+        <entry key="..\:/android/CSdict2/app/src/main/res/layout/view_message.xml" value="0.18614130434782608" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/viewuolderuser.xml" value="0.536" />
         <entry key="..\:/android/CSdict2/app/src/main/res/layout/words_layout_admin.xml" value="0.264" />
       </map>

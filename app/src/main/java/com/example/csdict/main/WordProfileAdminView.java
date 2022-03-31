@@ -1,4 +1,4 @@
-package com.example.csdict;
+package com.example.csdict.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.csdict.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class WordProfileAdminView extends AppCompatActivity {
@@ -24,9 +25,9 @@ public class WordProfileAdminView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_profile_admin_view);
         intent = getIntent();
-        name = findViewById(R.id.word_is);
-        desc = findViewById(R.id.desc_is);
-        app = findViewById(R.id.abbservaion_is);
+        name = findViewById(R.id.title_message_view);
+        desc = findViewById(R.id.appserv12);
+        app = findViewById(R.id.appserv1);
         id = findViewById(R.id.id_is);
         bt_fav = findViewById(R.id.add_to_faviorate_user);
         bt_fav.setVisibility(View.INVISIBLE);
@@ -41,6 +42,10 @@ public class WordProfileAdminView extends AppCompatActivity {
                      addWordToFav();
                 }
             });
+        }
+        else if(!isUser()){
+            bt_fav.setVisibility(View.INVISIBLE);
+
         }
 
     }

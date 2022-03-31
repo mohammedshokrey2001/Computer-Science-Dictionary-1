@@ -1,11 +1,13 @@
-package com.example.csdict;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.csdict.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.csdict.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.csdict;
+package com.example.csdict.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.csdict.DataModels.DataModelUser;
+import com.example.csdict.R;
 
 public class SignUp extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class SignUp extends AppCompatActivity {
     EditText resetq ;
     EditText resetA;
     EditText phone_number_ET;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,5 +93,8 @@ public class SignUp extends AppCompatActivity {
             startActivity(intent);
 
         }
+
     }
+
+
 }

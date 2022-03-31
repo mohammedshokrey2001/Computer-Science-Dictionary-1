@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bb"
     android:backgroundTintMode="src_in"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
     <TextView
         android:id="@+id/textView"

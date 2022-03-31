@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.csdict.DBHelper;
+import com.example.csdict.main.DBHelper;
 import com.example.csdict.DataModels.DataModelWord;
 import com.example.csdict.R;
 import com.example.csdict.RecycleViewAdminWord.ViewAdapterAd;
-import com.example.csdict.WordProfileAdminView;
+import com.example.csdict.main.WordProfileAdminView;
 
 import java.util.ArrayList;
 
@@ -80,7 +80,7 @@ public class Fragment5 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_5, container, false);
-        recyclerView = view.findViewById(R.id.word_view_admin);
+        recyclerView = view.findViewById(R.id.messages_inbox);
 
 
        adapter();
@@ -125,7 +125,7 @@ public class Fragment5 extends Fragment {
                 intent.putExtra("desc", words.get(postion).getDescription());
                 intent.putExtra("app", words.get(postion).getApservation());
                 intent.putExtra("id", idd);
-                intent.putExtra("user_or_admin", "user");
+                intent.putExtra("user_or_admin", "admin");
 
 
 
