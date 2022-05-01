@@ -1,6 +1,5 @@
 package com.example.csdict.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,12 +41,12 @@ public class SignUp extends AppCompatActivity {
          sginup_bt.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 sginup_bt();
+                 sginUpBt();
              }
          });
     }
 
-    private void sginup_bt() {
+    private void sginUpBt() {
 
         if (
                 email_ET.getText().toString().equals("") ||
@@ -89,8 +88,7 @@ public class SignUp extends AppCompatActivity {
 
 
 
-            Intent intent = new Intent(SignUp.this, SignIn.class);
-            startActivity(intent);
+            finish();
 
         }
 

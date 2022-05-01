@@ -62,9 +62,9 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MyViewHolder> 
         private TextView phone;
         public MyViewHolder( View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.name_view_holder);
+            name = itemView.findViewById(R.id.name_word_view_holder);
             isActive = itemView.findViewById(R.id.isActive_viewholder);
-            phone = itemView.findViewById(R.id.phone_viewholder);
+            phone = itemView.findViewById(R.id.word_apps_viewholder);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

@@ -61,9 +61,9 @@ public class ViewAdapterMessages extends RecyclerView.Adapter<ViewAdapterMessage
         private TextView flag;
         public MyViewHolder( View itemView) {
             super(itemView);
-            sender = itemView.findViewById(R.id.name_view_holder);
+            sender = itemView.findViewById(R.id.name_word_view_holder);
             title = itemView.findViewById(R.id.isActive_viewholder);
-            flag = itemView.findViewById(R.id.phone_viewholder);
+            flag = itemView.findViewById(R.id.word_apps_viewholder);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
